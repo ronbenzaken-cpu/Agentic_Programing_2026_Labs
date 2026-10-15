@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weekly Plate – Diet Menu Planner</title>
+  <meta name="description" content="Plan a week of meals around your allergies, tastes and kitchen.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#step-1">Skip to planner</a>
+
+  <header class="topbar">
+    <div class="brand">🥗 Weekly Plate</div>
+    <nav aria-label="Progress">
+      <ol class="progress" id="progress">
+        <li><a href="#step-1" data-step="1"><span class="num">1</span><span class="lbl">Allergies</span></a></li>
+        <li><a href="#step-2" data-step="2"><span class="num">2</span><span class="lbl">Foods</span></a></li>
+        <li><a href="#step-3" data-step="3"><span class="num">3</span><span class="lbl">Cooking</span></a></li>
+        <li><a href="#step-4" data-step="4"><span class="num">4</span><span class="lbl">Menu</span></a></li>
+        <li><a href="#step-5" data-step="5"><span class="num">5</span><span class="lbl">Shopping</span></a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Welcome -->
+    <section class="hero" aria-labelledby="welcome-title">
+      <div class="hero-emoji" aria-hidden="true">🥑🍳🥕🍝🍓</div>
+      <h1 id="welcome-title">Weekly Plate</h1>
+      <p class="lead">Weekly Plate builds a full week of meals around your allergies, the foods you love and the time you have to cook.
+        Tell us what to avoid, tap the foods you enjoy, set your kitchen details and we'll create a menu plus a shopping list.
+        Allergies are always treated as strict no-go's.</p>
+      <button class="btn btn-primary btn-lg" id="start-btn" type="button">Start planning ↓</button>
+    </section>
+
+    <!-- Step 1 -->
+    <section class="step" id="step-1" aria-labelledby="s1-title" tabindex="-1">
+      <h2 id="s1-title"><span class="step-num">1</span> Allergies &amp; dislikes</h2>
+      <div class="two-col">
+        <div class="card">
+          <label for="allergy-input" class="field-label">Allergies <span class="pill pill-danger">never included</span></label>
+          <p class="hint" id="allergy-hint">Type an item and press Enter or comma. E.g. "nuts", "dairy", "shrimp".</p>
+          <div class="chip-input" data-target="allergies">
+            <ul class="chips" id="allergy-chips" aria-label="Your allergies"></ul>
+            <input id="allergy-input" type="text" autocomplete="off" aria-describedby="allergy-hint">
+          </div>
+          <p class="field-label small">Quick add common allergens</p>
+          <div class="quick-chips" id="quick-allergens" role="group" aria-label="Common allergens"></div>
+        </div>
+        <div class="card">
+          <label for="dislike-input" class="field-label">Dislikes <span class="pill">avoided when possible</span></label>
+          <p class="hint" id="dislike-hint">Foods you'd rather not eat. Press Enter or comma to add.</p>
+          <div class="chip-input" data-target="dislikes">
+            <ul class="chips" id="dislike-chips" aria-label="Your dislikes"></ul>
+            <input id="dislike-input" type="text" autocomplete="off" aria-describedby="dislike-hint">
+          </div>
+        </div>
+      </div>
+      <div class="step-nav"><a class="btn" href="#step-2">Next: food preferences →</a></div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step" id="step-2" aria-labelledby="s2-title" tabindex="-1">
+      <h2 id="s2-title"><span class="step-num">2</span> Foods you enjoy</h2>
+      <p class="hint">Tap the foods you like. We'll favour dishes that use them. Allergens are locked out.</p>
+      <div class="carousel card">
+        <div class="tabs" role="tablist" id="cat-tabs" aria-label="Food categories"></div>
+        <div id="slides"></div>
+        <div class="carousel-nav">
+          <button class="btn" type="button" id="prev-slide" aria-label="Previous category">← Prev</button>
+          <span id="slide-status" aria-live="polite"></span>
+          <button class="btn" type="button" id="next-slide" aria-label="Next category">Next →</button>
+        </div>
+      </div>
+      <div class="step-nav"><a class="btn" href="#step-3">Next: cooking settings →</a></div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step" id="step-3" aria-labelledby="s3-title" tabindex="-1">
+      <h2 id="s3-title"><span class="step-num">3</span> Cooking settings</h2>
+      <div class="settings-grid">
+        <fieldset class="card">
+          <legend>Cooking skill</legend>
+          <div class="segmented" id="skill-group">
+            <label><input type="radio" name="skill" value="beginner"> <span>Beginner</span></label>
+            <label><input type="radio" name="skill" value="intermediate"> <span>Intermediate</span></label>
+            <label><input type="radio" name="skill" value="advanced"> <span>Advanced</span></label>
+          </div>
+        </fieldset>
+        <div class="card">
+          <label for="max-time" class="field-label">Max cooking time per meal: <output id="max-time-out" for="max-time">45 min</output></label>
+          <input type="range" id="max-time" min="10" max="90" step="5" value="45" aria-describedby="max-time-out">
+          <div class="range-scale" aria-hidden="true"><span>10 min</span><span>90 min</span></div>
+        </div>
+        <fieldset class="card">
+          <legend>Available equipment</legend>
+          <div class="check-grid" id="equipment-group">
+            <label><input type="checkbox" name="equipment" value="stove"> 🔥 Stove</label>
+            <label><input type="checkbox" name="equipment" value="oven"> ♨️ Oven</label>
+            <label><input type="checkbox" name="equipment" value="microwave"> 📻 Microwave</label>
+            <label><input type="checkbox" name="equipment" value="airfryer"> 🌀 Air fryer</label>
+            <label><input type="checkbox" name="equipment" value="grill"> 🍢 Grill</label>
+            <label><input type="checkbox" id="no-cook" value="nocook"> 🥗 No-cook only</label>
+          </div>
+        </fieldset>
+        <fieldset class="card">
+          <legend>Meals per day</legend>
+          <div class="toggle-row" id="meals-group">
+            <label class="toggle"><input type="checkbox" name="meals" value="breakfast"> <span>🍳 Breakfast</span></label>
+            <label class="toggle"><input type="checkbox" name="meals" value="lunch"> <span>🥪 Lunch</span></label>
+            <label class="toggle"><input type="checkbox" name="meals" value="dinner"> <span>🍝 Dinner</span></label>
+            <label class="toggle"><input type="checkbox" name="meals" value="snack"> <span>🍎 Snack</span></label>
+          </div>
+        </fieldset>
+        <div class="card">
+          <label for="people" class="field-label">Number of people</label>
+          <div class="stepper">
+            <button type="button" class="btn btn-icon" id="people-minus" aria-label="Fewer people">−</button>
+            <input type="number" id="people" min="1" max="12" value="2" inputmode="numeric">
+            <button type="button" class="btn btn-icon" id="people-plus" aria-label="More people">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav"><button class="btn btn-primary" type="button" id="to-menu">Create my menu →</button></div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step" id="step-4" aria-labelledby="s4-title" tabindex="-1">
+      <h2 id="s4-title"><span class="step-num">4</span> Your weekly menu</h2>
+      <div class="menu-controls no-print">
+        <button class="btn btn-primary" type="button" id="generate-btn">✨ Generate menu</button>
+        <button class="btn" type="button" id="regen-btn" disabled>🔁 Generate new menu</button>
+        <button class="btn btn-success" type="button" id="accept-btn" disabled>✅ Accept menu</button>
+        <button class="btn" type="button" id="print-btn">🖨️ Print / PDF</button>
+      </div>
+      <div id="menu-status" class="status" role="status" aria-live="polite"></div>
+      <div id="menu-grid" class="menu-grid"></div>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="step" id="step-5" aria-labelledby="s5-title" tabindex="-1">
+      <h2 id="s5-title"><span class="step-num">5</span> Shopping list</h2>
+      <div id="shopping" class="shopping"><p class="empty">Accept a menu to get your shopping list.</p></div>
+    </section>
+  </main>
+
+  <footer class="footer no-print">
+    <p>Weekly Plate · Always double-check labels – product recipes vary.</p>
+    <p><a href="#" id="safety-link">Run safety check</a> · <a href="#" id="reset-link">Reset all data</a></p>
+  </footer>
+
+  <dialog id="safety-dialog" aria-labelledby="safety-title">
+    <h2 id="safety-title">Allergy safety check</h2>
+    <div id="safety-result"></div>
+    <form method="dialog"><button class="btn btn-primary">Close</button></form>
+  </dialog>
+
+  <script src="data/foods.js"></script>
+  <script src="data/dishes.js"></script>
+  <script src="js/allergens.js"></script>
+  <script src="js/generator.js"></script>
+  <script src="js/selftest.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
